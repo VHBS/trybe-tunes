@@ -32,7 +32,6 @@ export default class Login extends Component {
     });
     await createUser({ name: inputName });
     history.push('/search');
-    console.log(history);
   }
 
   renderFunction() {
@@ -59,8 +58,6 @@ export default class Login extends Component {
   }
 
   render() {
-    const { history } = this.props;
-    console.log(history);
     return (
       <div>
         {this.renderFunction()}

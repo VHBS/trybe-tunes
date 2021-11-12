@@ -13,7 +13,6 @@ class App extends React.Component {
     return (
       <>
         <p>TrybeTunes</p>
-
         <BrowserRouter>
           <Switch>
             <Route path="/profile/edit" component={ ProfileEdit } />
