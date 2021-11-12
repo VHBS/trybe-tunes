@@ -1,0 +1,21 @@
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
+export default class CardAlbumDescribes extends Component {
+  render() {
+    const { artistName,
+      collectionName,
+    } = this.props;
+    return (
+      <div>
+        <h6 data-testid="artist-name">{ artistName }</h6>
+        <p data-testid="album-name">{ collectionName }</p>
+      </div>
+    );
+  }
+}
+
+CardAlbumDescribes.propTypes = {
+  collectionName: PropTypes.string.isRequired,
+  artistName: PropTypes.string.isRequired,
+};

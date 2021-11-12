@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-export default class CardAlbum extends Component {
+export default class CardAlbumSearch extends Component {
   render() {
     const { collectionName,
       artistName,
@@ -30,7 +30,7 @@ export default class CardAlbum extends Component {
   }
 }
 
-CardAlbum.propTypes = {
+CardAlbumSearch.propTypes = {
   collectionName: PropTypes.string.isRequired,
   artistName: PropTypes.string.isRequired,
   collectionId: PropTypes.number.isRequired,
