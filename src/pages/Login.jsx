@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+// import { Redirect } from 'react-router';
 import { createUser } from '../services/userAPI';
 import Carregando from './Carregando';
 

@@ -43,10 +43,9 @@ export default class Album extends Component {
           {loading ? <Carregando />
             : (
               <div>
-                <h6 data-testid="artist-name">
-                  Artista:
-                  { idSearch[0].artistName }
-                </h6>
+                <h3 data-testid="artist-name">
+                  {`Artista: ${idSearch[0].artistName}`}
+                </h3>
                 <p data-testid="album-name">
                   Album:
                   { idSearch[0].collectionName }
