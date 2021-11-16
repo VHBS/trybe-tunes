@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// import { getFavoriteSongs } from '../services/favoriteSongsAPI';
-// import Carregando from '../pages/Carregando';
 
 export default class MusicCard extends Component {
   render() {
     const { trackName,
       previewUrl,
       trackId,
-      checkBoxClicked2,
+      handleClick,
       checked,
     } = this.props;
 
@@ -27,7 +25,7 @@ export default class MusicCard extends Component {
         >
           Favorita
           <input
-            onChange={ checkBoxClicked2 }
+            onChange={ handleClick }
             data-testid={ `checkbox-music-${trackId}` }
             type="checkbox"
             id={ trackId }
@@ -44,5 +42,5 @@ MusicCard.propTypes = {
   previewUrl: PropTypes.string.isRequired,
   trackId: PropTypes.number.isRequired,
   checked: PropTypes.bool.isRequired,
-  checkBoxClicked2: PropTypes.func.isRequired,
+  handleClick: PropTypes.func.isRequired,
 };

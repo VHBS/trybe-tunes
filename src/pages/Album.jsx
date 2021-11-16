@@ -4,7 +4,7 @@ import Header from '../components/Header';
 import getMusics from '../services/musicsAPI';
 import MusicCard from '../components/MusicCard';
 import Carregando from './Carregando';
-import { getFavoriteSongs, addSong } from '../services/favoriteSongsAPI';
+import { getFavoriteSongs, addSong, removeSong } from '../services/favoriteSongsAPI';
 // import { addSong, getFavoriteSongs, removeSong } from '../services/
 export default class Album extends Component {
   constructor() {
@@ -15,19 +15,23 @@ export default class Album extends Component {
       idSearch: [],
     };
     this.callApiInit = this.callApiInit.bind(this);
-    // this.checkBoxClicked = this.checkBoxClicked.bind(this);
-    // this.checkBoxValue = this.checkBoxValue.bind(this);
+    this.verifyChecked = this.verifyChecked.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   async componentDidMount() {
     await this.callApiInit();
   }
 
-  teste = async (param) => {
-    // console.log(param);
+  async handleClick(param, { target: { checked } }) {
+    console.log(checked);
     this.setState({ loading: true,
     });
-    await addSong(param);
+    if (!checked) {
+      await removeSong(param);
+    } else {
+      await addSong(param);
+    }
     const listaAtualizada = await getFavoriteSongs();
     this.setState({
       favoriteList: listaAtualizada,
@@ -35,11 +39,10 @@ export default class Album extends Component {
     });
   }
 
-  teste2 = ({ trackId }) => {
+  verifyChecked = ({ trackId }) => {
     const { favoriteList } = this.state;
     const checkListSongs = favoriteList
       .some((music2) => Number(music2.trackId) === Number(trackId));
-    // console.log(checkListSongs);
     return checkListSongs;
   }
 
@@ -53,27 +56,6 @@ export default class Album extends Component {
       loading: false,
     });
   }
-
-  // checkBoxValue(param) { // ANTIGA
-  //   const { favoriteList } = this.state;
-  //   const checkListSongs = favoriteList
-  //     .some((id) => Number(id) === Number(param.trackId));
-  //   return checkListSongs;
-  // }
-
-  // async checkBoxClicked({ target: { id } }) { // ANTIGA
-  //   const { favoriteList } = this.state;
-  //   this.setState({ loading: true,
-  //   });
-  //   if (!favoriteList.includes(id)) {
-  //     await addSong(id);
-  //   }
-  //   const listaAtualizada = await getFavoriteSongs();
-  //   this.setState({
-  //     favoriteList: listaAtualizada,
-  //     loading: false,
-  //   });
-  // }
 
   render() {
     const { idSearch, loading } = this.state;
@@ -96,10 +78,8 @@ export default class Album extends Component {
                     <div key={ music.artistId + index + music.trackName }>
                       <MusicCard
                         { ... music }
-                        checkBoxClicked2={ () => this.teste(music) }
-                        // checkBoxClicked={ this.checkBoxClicked } // antiga
-                        // checked={ this.checkBoxValue(music) } // antiga
-                        checked={ this.teste2(music) }
+                        handleClick={ (event) => this.handleClick(music, event) }
+                        checked={ this.verifyChecked(music) }
                       />
                     </div>))}
               </div>)}
