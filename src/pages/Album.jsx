@@ -4,11 +4,13 @@ import Header from '../components/Header';
 import getMusics from '../services/musicsAPI';
 import MusicCard from '../components/MusicCard';
 import Carregando from './Carregando';
+import { getFavoriteSongs } from '../services/favoriteSongsAPI';
 
 export default class Album extends Component {
   constructor() {
     super();
     this.state = {
+      favoriteList: [],
       loading: true,
       idSearch: [],
     };
@@ -22,8 +24,10 @@ export default class Album extends Component {
   async callApiInit() {
     const { match: { params: { id } } } = this.props;
     const resultApi = await getMusics(id);
+    const resultFavApi = await getFavoriteSongs();
     if (resultApi !== undefined) {
       this.setState({
+        favoriteList: [...resultFavApi],
         idSearch: [...resultApi],
         loading: false,
       });
@@ -53,7 +57,7 @@ export default class Album extends Component {
                 {idSearch.filter((music) => music.trackName && music.previewUrl)
                   .map((music, index) => (
                     <div key={ music.artistId + index + music.trackName }>
-                      <MusicCard { ... music } />
+                      <MusicCard { ... music } { ... this.state } />
                     </div>))}
               </div>)}
         </div>
