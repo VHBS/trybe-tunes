@@ -24,7 +24,6 @@ export default class Album extends Component {
   }
 
   async handleClick(param, { target: { checked } }) {
-    console.log(checked);
     this.setState({ loading: true,
     });
     if (!checked) {
