@@ -5,7 +5,7 @@ import getMusics from '../services/musicsAPI';
 import MusicCard from '../components/MusicCard';
 import Carregando from './Carregando';
 import { getFavoriteSongs, addSong, removeSong } from '../services/favoriteSongsAPI';
-// import { addSong, getFavoriteSongs, removeSong } from '../services/
+
 export default class Album extends Component {
   constructor() {
     super();
@@ -77,6 +77,7 @@ export default class Album extends Component {
                     <div key={ music.artistId + index + music.trackName }>
                       <MusicCard
                         { ... music }
+                        trackIdNumber={ Number(music.trackId) }
                         handleClick={ (event) => this.handleClick(music, event) }
                         checked={ this.verifyChecked(music) }
                       />
