@@ -30,10 +30,10 @@ export default class Search extends Component {
     this.setState({
       loading: true,
     });
-    const doidera = await searchAlbumsAPI(inputSearch);
+    const resultadoApi = await searchAlbumsAPI(inputSearch);
     this.setState({
       loading: false,
-      searchResult: [...doidera],
+      searchResult: resultadoApi,
     });
   }
 
