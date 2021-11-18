@@ -19,9 +19,6 @@ export default class Profile extends Component {
   }
 
   async gettingUser() {
-    // this.setState({
-    //   loading: true,
-    // });
     const user = await getUser();
     this.setState({
       loading: false,
